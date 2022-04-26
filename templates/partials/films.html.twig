@@ -1,0 +1,41 @@
+<div class="col-lg-3 col-md-4 col-6">
+	<div class="product">
+		<div class="product_img">
+			<a href="">
+				<img height="200" src="/assets/uploads/products/{{film.image}}" alt="product_img1">
+			</a>
+
+		</div>
+		<div class="product_action_box">
+			<ul class="list_none pr_action_btn">
+
+				<li>
+					<a href="" class="">
+						<i class="icon-shuffle"></i>
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('film_details',{'slug': film.slug})}}" class="">
+						<i class="icon-magnifier-add"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-heart"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="product_info">
+			<h6 class="product_title">
+				<a href="">{{film.titre}}</a>
+			</h6>
+
+
+			<div class="pr_desc">
+				<p>{{film.description}}</p>
+			</div>
+
+		</div>
+	</div>
+</div>

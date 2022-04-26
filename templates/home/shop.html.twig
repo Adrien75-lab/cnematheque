@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% trans %}
+	Cinematheque{% endtrans %}
+{% endblock title %}
+{% block stylesheets %}
+	<link href="/assets/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+	{{ include("partials/title_section.html.twig", {'name':'Rechercher un film'}) }}
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="row shop_container">
+						{% if not films %}
+							<p class="m-5">{% trans %}Sorry. No product matches your search results !{% endtrans %}</p>
+						{% endif %}
+						{% for film in films %}
+							{{ include('partials/films.html.twig',{'film': film}) }}
+						{% endfor %}
+					</div>
+
+
+				</div>
+				<div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
+					<div class="sidebar">
+						{{ form_start(search) }}
+						<div class="widget">
+							<h5 class="widget_title">{% trans %}Recherche une catégorie{% endtrans %}</h5>
+							{{ form_row(search.categories)}}
+						</div>
+						<div class="widget">
+							<h5 class="widget_title">{% trans %}Rechercher un acteur{% endtrans %}</h5>
+							{{ form_row(search.acteurs)}}
+						</div>
+
+						<div class="widget">
+							<h5 class="widget_title">{% trans %}Tags{% endtrans %}</h5>
+							{{ form_row(search.tags)}}
+						</div>
+						<button class="btn btn-border-fill btn-block">
+							{% trans %}Search{% endtrans %}</button>
+						{{ form_end(search)}}
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+$('.js-categories-multiple').select2();
+});
+	</script>
+{% endblock %}

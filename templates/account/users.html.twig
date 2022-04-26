@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Liste des utilisateurs{% endtrans %}
+{% endblock %}
+
+{% block body %}
+	{{ include("partials/title_section.html.twig", {'name': 'Liste utilisateurs'})}}
+
+
+	<h1>Liste des utilisateurs</h1>
+	<table class="table">
+		<thead>
+
+			<th>ID</th>
+			<th>EMAIL</th>
+			<th>ROLES</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{user.id}}</td>
+					<td>{{user.email}}</td>
+					<td>
+						{% for role in user.roles %}
+							{% if role == "ROLE_USER" %}
+								Utilisateur
+							{% elseif role == "ROLE_EDITOR" %}
+								Editeur
+							{% elseif role == "ROLE_ADMIN" %}
+								Admin
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td>
+						<a href="{{ path('modifier_utilisateur', {'id' : user.id}) }}" class="btn btn-warning">Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Il n'y a pas d'utilisateur inscrit</td>
+				</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+	{#
+																			        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																			        See https://symfony.com/doc/current/security/remember_me.html
+																			
+																			        <div class="checkbox mb-3">
+																			            <label>
+																			                <input type="checkbox" name="_remember_me"> Remember me
+																			            </label>
+																			        </div>
+																			    #}
+
+{% endblock %}

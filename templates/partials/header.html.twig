@@ -1,0 +1,91 @@
+<div class="preloader">
+	<div class="preloader-content">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+<header class="header_wrap fixed-top header_with_topbar">
+	<div class="bottom_header dark_skin main_menu_uppercase">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg">
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false">
+					<span class="ion-android-menu"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="dropdown">
+							<a class="nav-link" href="{{ path('home')}}">Home</a>
+						</li>
+
+						<li>
+							<a class="nav-link nav_item" href="{{ path('shop')}}">
+								<span>Films
+								</span>
+							</a>
+						</li>
+
+
+						<li>
+							<a class="nav-link nav_item" href="#">Nous contacter</a>
+						</li>
+						{% if app.user %}
+							<li>
+								<a class="nav-link nav_item" href="{{ path('app_logout')}}">
+									<i class="ti-user"></i>
+									<span>Deconnexion
+									</span>
+								</a>
+							</li>
+							<li>
+								<a class="nav-link nav_item" href="{{ path('app_account')}}">
+									<i class="ti-user"></i>
+									<span>Mon compte
+									</span>
+								</a>
+							</li>
+
+
+						{% else %}
+							<li>
+								<a class="nav-link nav_item" href="{{ path('app_login')}}">
+									<i class="ti-user"></i>
+									<span>Connexion</span>
+								</a>
+							</li>
+							<li>
+								<a class="nav-link nav_item" href="{{ path('app_register')}}">
+									<i class="fas fa-sign-in-alt"></i>
+									<span>S'enregistrer</span>
+								</a>
+							</li>
+
+						{% endif %}
+					</ul>
+				</div>
+				<ul class="navbar-nav attr-nav align-items-center">
+					<li>
+						<a href="javascript:void(0);" class="nav-link search_trigger">
+							<i class="linearicons-magnifier"></i>
+						</a>
+						<div class="search_wrap">
+							<span class="close-search">
+								<i class="ion-ios-close-empty"></i>
+							</span>
+							<form>
+								<input type="text" placeholder="Search" class="form-control" id="search_input">
+								<button type="submit" class="search_icon">
+									<i class="ion-ios-search-strong"></i>
+								</button>
+							</form>
+						</div>
+						<div class="search_overlay"></div>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
