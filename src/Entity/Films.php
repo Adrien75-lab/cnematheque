@@ -72,14 +72,13 @@ class Films
     private $acteur;
 
     /**
-     * @ORM\OneToOne(targetEntity=Films::class, inversedBy="films")
+     * @ORM\OneToOne(targetEntity=Films::class, cascade={"persist", "remove"})
      */
     private $films;
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
-        $this->film = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->acteurs = new ArrayCollection();
         $this->acteur = new ArrayCollection();
@@ -244,20 +243,26 @@ class Films
     }
 
     /**
-     * @return Collection|Films[]
+     * @return Collection<int, Acteur>
      */
-    public function getFilms(): Collection
+    public function getActeur(): Collection
     {
-        return $this->film;
+        return $this->acteur;
     }
+    public function __toString()
+    {
+        return $this->titre;
+    }
+
+    public function getFilms(): ?self
+    {
+        return $this->films;
+    }
+
     public function setFilms(?self $films): self
     {
         $this->films = $films;
 
         return $this;
-    }
-    public function __toString()
-    {
-        return $this->titre;
     }
 }
