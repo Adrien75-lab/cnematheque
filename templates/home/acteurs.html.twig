@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% trans %}
+	Cinematheque{% endtrans %}
+{% endblock title %}
+{% block stylesheets %}
+	<link href="/assets/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+	{{ include("partials/title_section.html.twig", {'name':'Liste des acteurs'}) }}
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row shop_container">
+						{% if not acteurs %}
+							<p class="m-5">{% trans %}Sorry. No product matches your search results !{% endtrans %}</p>
+						{% endif %}
+						{% for acteur in acteurs %}
+							{{ include('partials/acteurs.html.twig',{'acteur': acteur}) }}
+						{% endfor %}
+					</div>
+
+
+				</div>
+				
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

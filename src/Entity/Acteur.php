@@ -49,6 +49,12 @@ class Acteur
      */
     private $films;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    
     public function __construct()
     {
         $this->films = new ArrayCollection();
@@ -149,4 +155,17 @@ class Acteur
     {
         return $this->nom;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
 }

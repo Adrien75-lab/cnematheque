@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	{% trans %}Cinemathque{% endtrans %}
+	{% trans %}Cinematheque{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -47,28 +47,14 @@
 							<div class="pr_desc">
 								<p>{{ film.description | raw }}</p>
 							</div>
-							<div class="product_sort_info">
-								<ul>
-									<li>
-										<i class="linearicons-shield-check"></i>
-										1 Year AL Jazeera Brand Warranty</li>
-									<li>
-										<i class="linearicons-sync"></i>
-										30 Day Return Policy</li>
-									<li>
-										<i class="linearicons-bag-dollar"></i>
-										Cash on Delivery available</li>
-								</ul>
-							</div>
+							
 						</div>
 						<hr/>
 
 						<hr/>
 						<ul class="product-meta">
-							<li>SKU:
-								<a href="#">BE45VGRT</a>
-							</li>
-							<li>Category:
+							
+							<li>Categorie(s):
 								<a href="#">
 									{% for category in film.category %}
 										{{ category.nom }},
@@ -78,7 +64,7 @@
 							</li>
 							<li>Acteur:
 								<a href="#">
-									{% for acteur in film.acteur %}
+									{% for acteur in film.acteurs %}
 										{{ acteur.nom }},
 
 									{% endfor %}

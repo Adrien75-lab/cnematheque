@@ -81,26 +81,37 @@ class FilmsRepository extends ServiceEntityRepository
     public function findWithSearch($search)
     {
         $query = $this->createQueryBuilder('p');
-
-
-        //tags
-        if ($search->getTags()) {
-            $query = $query->andWhere('p.tags like :val')
-                ->setParameter('val', "%{$search->getTags()}%");
+        // Films
+        if ($search->getFilms()) {
+            $query = $query->where('p.id IN (:films)')
+                ->setParameter('films', $search->getFilms());
         }
-
         //Categories
         if ($search->getCategories()) {
             $query = $query->join('p.category', 'c')
                 ->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->getCategories());
         }
-        //Acteurs
+
+        // Acteurs
         if ($search->getActeurs()) {
             $query = $query->join('p.acteur', 'a')
                 ->andWhere('a.id IN (:acteurs)')
                 ->setParameter('acteurs', $search->getActeurs());
         }
+
+
+        //dd($query->getQuery());
         return $query->getQuery()->getResult();
+    }
+
+    public function searchFilm($mots)
+    {
+        $query1 = $this->createQueryBuilder('f');
+        if ($mots != null) {
+            $query1->andWhere('MATCH_AGAINST(f.titre) AGAINST (:mots boolean) > 0')
+                ->setParameter('mots', $mots);
+        }
+        return $query1->getQuery()->getResult();
     }
 }

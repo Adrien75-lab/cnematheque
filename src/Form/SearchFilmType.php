@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Acteur;
 use App\Entity\Categorie;
+use App\Entity\Films;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -34,12 +35,13 @@ class SearchFilmType extends AbstractType
                     'class' => 'js-categories-multiple'
                 ]
             ])
-
-            ->add('tags', TextType::class, [
+            ->add('films', EntityType::class, [
+                'class' => Films::class,
                 'label' => false,
                 'required' => false,
+                'multiple' => true,
                 'attr' => [
-                    'placeholder' => 'tags ...'
+                    'class' => 'js-categories-multiple'
                 ]
             ]);
     }

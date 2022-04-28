@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Acteur;
 use App\Entity\Films;
 use App\Entity\SearchFilms;
+use App\Form\SearchFilmsByWordsType;
 use App\Form\SearchFilmType;
 use App\Repository\FilmsRepository;
 use App\Repository\ActeurRepository;
@@ -37,7 +39,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'film' => $films,
+            'films' => $films,
             'filmBestSeller' => $filmBestSeller,
             'categories' => $categories,
             'acteurs' => $acteurs,
@@ -59,6 +61,21 @@ class HomeController extends AbstractController
             'film' => $film
         ]);
     }
+    /**
+     * @Route("/acteur",name="acteur")
+     *
+     */
+    public function showActeur(?Acteur $acteurs, ActeurRepository $repoActeur): Response
+
+    {
+        $acteurs = $repoActeur->findAll();
+        return $this->render("home/acteurs.html.twig", [
+            'acteurs' => $acteurs
+        ]);
+    }
+
+
+
 
 
 
@@ -78,6 +95,8 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $films = $repoFilms->findWithSearch($search);
+            
+           
         }
 
 
@@ -91,8 +110,4 @@ class HomeController extends AbstractController
 
         ]);
     }
-    /**
-     *@Route("/Film{slug}",name="film_details")
-     * 
-     */
 }

@@ -9,8 +9,10 @@ class SearchFilms
      */
     private $categories = [];
 
+
     private $tags = null;
     private $acteurs = [];
+    private $films = [];
 
     public function getCategories(): ?array
     {
@@ -44,6 +46,17 @@ class SearchFilms
     public function setActeurs(?array $acteurs): self
     {
         $this->acteurs = $acteurs;
+
+        return $this;
+    }
+    public function getFilms(): ?array
+    {
+        return $this->films;
+    }
+
+    public function setFilms(?array $films): self
+    {
+        $this->films = $films;
 
         return $this;
     }

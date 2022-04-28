@@ -6,9 +6,11 @@ use App\Repository\FilmsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=FilmsRepository::class)
+ * @ORM\Table(name="films",indexes={@ORM\Index(columns={"titre"}, flags={"fulltext"})})
  */
 class Films
 {
@@ -69,9 +71,15 @@ class Films
      */
     private $acteur;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Films::class, inversedBy="films")
+     */
+    private $films;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->film = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->acteurs = new ArrayCollection();
         $this->acteur = new ArrayCollection();
@@ -236,10 +244,20 @@ class Films
     }
 
     /**
-     * @return Collection<int, Acteur>
+     * @return Collection|Films[]
      */
-    public function getActeur(): Collection
+    public function getFilms(): Collection
     {
-        return $this->acteur;
+        return $this->film;
+    }
+    public function setFilms(?self $films): self
+    {
+        $this->films = $films;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->titre;
     }
 }

@@ -31,6 +31,10 @@ class ActeurCrudController extends AbstractCrudController
             TextField::new('prenom'),
             DateField::new('datenaissance'),
             TextField::new('sexe'),
+            ImageField::new('image')->setBasePath('/assets/uploads/products/')
+                ->setUploadDir('/public/assets/uploads/products/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
 
         ];
     }
